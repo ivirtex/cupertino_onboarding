@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
+  cupertino_onboarding:
+    dependency: "direct main"
+    description:
+      path: "/Users/ivirtex/Desktop/Development/cupertino_onboarding"
+      relative: false
+    source: path
+    version: "1.0.0+1"
   diff_match_patch:
     dependency: transitive
     description:

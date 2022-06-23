@@ -15,6 +15,9 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
 
+  cupertino_onboarding:
+    path: /Users/ivirtex/Desktop/Development/cupertino_onboarding
+
 dev_dependencies:
   bloc_test: ^9.0.3
   flutter_test:
