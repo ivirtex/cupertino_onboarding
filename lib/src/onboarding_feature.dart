@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 /// Widget that represents a feature of the onboarding.
 class OnboardingFeature extends StatelessWidget {
@@ -13,10 +13,14 @@ class OnboardingFeature extends StatelessWidget {
   });
 
   /// Feature's title.
-  final String title;
+  ///
+  /// Usually a Text widget.
+  final Widget title;
 
   /// Feature's description.
-  final String description;
+  ///
+  /// Usually a Text widget.
+  final Widget description;
 
   /// Feature's icon.
   final IconData iconData;
@@ -43,15 +47,20 @@ class OnboardingFeature extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
+                  DefaultTextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: CupertinoColors.label.resolveFrom(context),
                     ),
+                    child: title,
                   ),
-                  Text(
-                    description,
-                  ),
+                  DefaultTextStyle(
+                    style: TextStyle(
+                      color:
+                          CupertinoColors.secondaryLabel.resolveFrom(context),
+                    ),
+                    child: description,
+                  )
                 ],
               ),
             ),

@@ -51,30 +51,33 @@ class _CounterViewState extends State<CounterView> {
               const Spacer(),
               FloatingActionButton(
                 onPressed: () {
-                  showCupertinoModalPopup(
+                  showCupertinoModalPopup<void>(
                     context: context,
                     builder: (_) => CupertinoOnboarding(
-                      onNext: () => Navigator.pop(context),
+                      onContinue: () => Navigator.pop(context),
                       features: const [
                         OnboardingFeature(
                           iconData: CupertinoIcons.heart_fill,
-                          title: 'More Personalized',
-                          description:
-                              'Top Stories picked for you and recommendations from Siri.',
+                          title: Text('More Personalized'),
+                          description: Text(
+                            'Top Stories picked for you and recommendations from Siri.',
+                          ),
                           iconColor: CupertinoColors.systemPink,
                         ),
                         OnboardingFeature(
                           iconData: CupertinoIcons.news_solid,
-                          title: 'New Spotlight Tab',
-                          description:
-                              'Discover great stories selected by our colors.',
+                          title: Text('New Spotlight Tab'),
+                          description: Text(
+                            'Discover great stories selected by our colors.',
+                          ),
                           iconColor: CupertinoColors.systemRed,
                         ),
                         OnboardingFeature(
                           iconData: CupertinoIcons.play_arrow_solid,
-                          title: 'Video in Today View',
-                          description:
-                              "The day's best videos, right in the News widget.",
+                          title: Text('Video in Today View'),
+                          description: Text(
+                            "The day's best videos, right in the News widget.",
+                          ),
                           iconColor: CupertinoColors.systemBlue,
                         ),
                       ],

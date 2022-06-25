@@ -7,15 +7,19 @@ const CupertinoDynamicColor _kBackgroundColor =
   darkColor: CupertinoColors.black,
 );
 
-/// Represents an onboarding screen in iOS style.
+/// Represents an onboarding screen in iOS 15 style.
+///
+/// It is possible to restyle the Widget to match older iOS versions.
 class CupertinoOnboarding extends StatelessWidget {
   /// Default constructor of the `CupertinoOnboarding` widget.
   const CupertinoOnboarding({
-    this.title = "What's New",
+    this.title = const Text("What's New"),
     required this.features,
     this.backgroundColor,
-    this.nextButtonChild,
-    this.onNext,
+    this.bottomButtonChild,
+    this.bottomButtonBorderRadius,
+    this.bottomButtonPadding,
+    this.onContinue,
     super.key,
   }) : assert(features.length > 0, 'Feature list cannot be empty');
 
@@ -23,7 +27,7 @@ class CupertinoOnboarding extends StatelessWidget {
   ///
   /// Apple often uses this title to show the user what's new.
   /// It is recommended to keep it short.
-  final String title;
+  final Widget title;
 
   /// List of `OnboardingFeature` widgets that will be displayed
   /// under the title.
@@ -32,20 +36,36 @@ class CupertinoOnboarding extends StatelessWidget {
   /// Background color of the onboarding screen.
   ///
   /// Defaults to the iOS style.
+  ///
+  /// The background color of the bottom button is derived
+  /// from the [CupertinoTheme]'s primaryColor.
   final Color? backgroundColor;
 
   /// Child used in the next button.
   ///
-  /// Default to the Text('Next') widget.
-  final Widget? nextButtonChild;
+  /// Default to the Text('Continue') widget.
+  final Widget? bottomButtonChild;
 
-  /// Invoked when the user taps on the next button.
+  /// Border radius of the next button.
+  ///
+  /// Can't match native iOS look, because as of 3.0.2 Flutter
+  /// still uses rounded rectangle shape for [CupertinoButton]
+  /// instead of squircle paths.
+  /// https://github.com/flutter/flutter/issues/13914
+  final BorderRadius? bottomButtonBorderRadius;
+
+  /// Padding of the bottom button.
+  ///
+  /// Defaults to `EdgeInsets.zero`.
+  final EdgeInsets? bottomButtonPadding;
+
+  /// Invoked when the user taps on the bottom button.
   /// Must not be null to be enabled.
   ///
   /// E.g. use `() => Navigator.of(context).pop()` to close the onboarding
   /// or use `setState` with changed state boolean to re-render the parent
   /// widget and conditionally display other widget instead of the onboarding.
-  final VoidCallback? onNext;
+  final VoidCallback? onContinue;
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +80,14 @@ class CupertinoOnboarding extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
-              Text(
-                title,
-                style: const TextStyle(
+              DefaultTextStyle(
+                style: TextStyle(
+                  color: CupertinoColors.label.resolveFrom(context),
                   fontWeight: FontWeight.w900,
                   letterSpacing: -4,
                   fontSize: 50,
                 ),
+                child: title,
               ),
               const SizedBox(height: 30),
               ConstrainedBox(
@@ -87,14 +108,19 @@ class CupertinoOnboarding extends StatelessWidget {
               ),
               const Spacer(flex: 2),
               Center(
-                child: CupertinoButton.filled(
-                  onPressed: onNext,
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      nextButtonChild ?? const Text('Next'),
-                      const Spacer(),
-                    ],
+                child: Padding(
+                  padding: bottomButtonPadding ?? EdgeInsets.zero,
+                  child: CupertinoButton.filled(
+                    borderRadius:
+                        bottomButtonBorderRadius ?? BorderRadius.circular(15),
+                    onPressed: onContinue,
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        bottomButtonChild ?? const Text('Continue'),
+                        const Spacer(),
+                      ],
+                    ),
                   ),
                 ),
               )

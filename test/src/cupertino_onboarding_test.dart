@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final features = [
     OnboardingFeature(
-      title: 'Feature 1',
-      description: 'Description 1',
+      title: Text('Feature 1'),
+      description: Text('Description 1'),
       iconData: CupertinoIcons.add,
     ),
   ];
