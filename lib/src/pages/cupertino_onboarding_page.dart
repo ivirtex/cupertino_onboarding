@@ -50,7 +50,12 @@ class CupertinoOnboardingPage extends StatelessWidget {
           const Spacer(),
           Expanded(
             flex: 10,
-            child: body,
+            child: DefaultTextStyle(
+              style: TextStyle(
+                color: CupertinoColors.label.resolveFrom(context),
+              ),
+              child: body,
+            ),
           ),
         ],
       ),
