@@ -7,21 +7,38 @@ final CupertinoDynamicColor _kBackgroundColor =
   darkColor: CupertinoColors.systemGrey6.darkColor,
 );
 
+final CupertinoDynamicColor _kActiveDotColor =
+    CupertinoDynamicColor.withBrightness(
+  color: CupertinoColors.systemGrey2.darkColor,
+  darkColor: CupertinoColors.systemGrey2.color,
+);
+
+final CupertinoDynamicColor _kInactiveDotColor =
+    CupertinoDynamicColor.withBrightness(
+  color: CupertinoColors.systemGrey2.color,
+  darkColor: CupertinoColors.systemGrey2.darkColor,
+);
+
 /// Represents an onboarding screen in iOS 15 style.
 ///
 /// It is possible to restyle this widget to match older iOS versions.
 class CupertinoOnboarding extends StatefulWidget {
   /// Default constructor of the [CupertinoOnboarding] widget.
-  const CupertinoOnboarding({
+  CupertinoOnboarding({
     required this.pages,
     this.backgroundColor,
     this.bottomButtonChild,
     this.bottomButtonBorderRadius,
     this.bottomButtonPadding,
+    this.pageTransitionAnimationDuration = const Duration(milliseconds: 500),
+    this.pageTransitionAnimationCurve = Curves.easeInOut,
     this.onContinue,
     this.onContinueOnLastPage,
     super.key,
-  });
+  }) : assert(
+          pages.isNotEmpty,
+          'Number of pages must be greater than 0',
+        );
 
   /// List of Widgets that will be displayed as pages.
   final List<Widget> pages;
@@ -52,6 +69,16 @@ class CupertinoOnboarding extends StatefulWidget {
   /// Defaults to `const EdgeInsets.only(bottom: 60)`.
   final EdgeInsets? bottomButtonPadding;
 
+  /// Duration that is used to animate the transition between pages.
+  ///
+  /// Defaults to `const Duration(milliseconds: 500)`.
+  final Duration pageTransitionAnimationDuration;
+
+  /// Animation curve that is used to animate the transition between pages.
+  ///
+  /// Defaults to `Curves.easeInOut`.
+  final Curve pageTransitionAnimationCurve;
+
   /// Invoked when the user taps on the bottom button.
   /// By default, it will navigate to the next page.
   final VoidCallback? onContinue;
@@ -72,6 +99,20 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
   final PageController _pageController = PageController();
 
   int _currentPage = 0;
+  double _currentPageAsDouble = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _pageController.addListener(() {
+        setState(() {
+          _currentPageAsDouble = _pageController.page!;
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,15 +136,15 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
             if (widget.pages.length > 1)
               DotsIndicator(
                 dotsCount: widget.pages.length,
-                position: _currentPage.toDouble(),
+                position: _currentPageAsDouble,
                 decorator: DotsDecorator(
-                  activeColor: CupertinoColors.systemGrey.resolveFrom(context),
-                  color: CupertinoColors.systemGrey2.resolveFrom(context),
+                  activeColor: _kActiveDotColor.resolveFrom(context),
+                  color: _kInactiveDotColor.resolveFrom(context),
                   activeSize: const Size(8, 8),
                   size: const Size(8, 8),
                 ),
               ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
             Center(
               child: Padding(
                 padding: widget.bottomButtonPadding ??
@@ -143,8 +184,8 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
 
   Future<void> _animateToNextPage() async {
     await _pageController.nextPage(
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
+      duration: widget.pageTransitionAnimationDuration,
+      curve: widget.pageTransitionAnimationCurve,
     );
   }
 }

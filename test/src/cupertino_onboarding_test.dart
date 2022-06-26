@@ -4,12 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CupertinoOnboarding', () {
-    test('can be instantiated', () {
+    test('throws assertion if number of pages is 0', () {
       expect(
-        CupertinoOnboarding(
-          pages: [],
-        ),
-        isNotNull,
+        () => CupertinoOnboarding(pages: const []),
+        throwsAssertionError,
       );
     });
   });
