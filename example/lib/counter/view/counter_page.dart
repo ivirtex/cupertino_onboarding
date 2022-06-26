@@ -5,12 +5,15 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:cupertino_onboarding/cupertino_onboarding.dart';
 import 'package:example/counter/counter.dart';
 import 'package:example/l10n/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CounterPage extends StatelessWidget {
   const CounterPage({super.key});
@@ -50,35 +53,44 @@ class _CounterViewState extends State<CounterView> {
               const Center(child: CounterText()),
               const Spacer(),
               FloatingActionButton(
+                heroTag: 'modal',
                 onPressed: () {
-                  showCupertinoModalPopup<void>(
+                  showCupertinoModalBottomSheet<void>(
                     context: context,
                     builder: (_) => CupertinoOnboarding(
-                      onContinue: () => Navigator.pop(context),
-                      features: const [
-                        OnboardingFeature(
-                          iconData: CupertinoIcons.heart_fill,
-                          title: Text('More Personalized'),
-                          description: Text(
-                            'Top Stories picked for you and recommendations from Siri.',
+                      onContinueOnLastPage: () => Navigator.pop(context),
+                      pages: [
+                        WhatsNewPage(
+                          title: const Text(
+                            "What's New in Calendar",
                           ),
-                          iconColor: CupertinoColors.systemPink,
+                          features: const [
+                            OnboardingFeature(
+                              icon: Icon(CupertinoIcons.mail),
+                              title: Text('Found Events'),
+                              description: Text(
+                                'Siri suggests events found in Mail, Messages, and Safari, so you can add them easily, such as flight reservations and hotel bookings.',
+                              ),
+                            ),
+                            OnboardingFeature(
+                              icon: Icon(CupertinoIcons.time),
+                              title: Text('Time to Leave'),
+                              description: Text(
+                                "Calendar uses Apple Maps to look up locations, traffic conditions, and transit options to tell you when it's time to leave.",
+                              ),
+                            ),
+                            OnboardingFeature(
+                              icon: Icon(CupertinoIcons.location),
+                              title: Text('Location Suggestions'),
+                              description: Text(
+                                'Calendar suggests locations based on your past events and significant locations.',
+                              ),
+                            ),
+                          ],
                         ),
-                        OnboardingFeature(
-                          iconData: CupertinoIcons.news_solid,
-                          title: Text('New Spotlight Tab'),
-                          description: Text(
-                            'Discover great stories selected by our colors.',
-                          ),
-                          iconColor: CupertinoColors.systemRed,
-                        ),
-                        OnboardingFeature(
-                          iconData: CupertinoIcons.play_arrow_solid,
-                          title: Text('Video in Today View'),
-                          description: Text(
-                            "The day's best videos, right in the News widget.",
-                          ),
-                          iconColor: CupertinoColors.systemBlue,
+                        const CupertinoOnboardingPage(
+                          title: Text('Permissions'),
+                          body: Text('Permissions screen'),
                         ),
                       ],
                     ),
@@ -88,11 +100,13 @@ class _CounterViewState extends State<CounterView> {
               ),
               const SizedBox(height: 8),
               FloatingActionButton(
+                heroTag: 'increment',
                 onPressed: () => context.read<CounterCubit>().increment(),
                 child: const Icon(Icons.add),
               ),
               const SizedBox(height: 8),
               FloatingActionButton(
+                heroTag: 'decrement',
                 onPressed: () => context.read<CounterCubit>().decrement(),
                 child: const Icon(Icons.remove),
               ),

@@ -18,6 +18,7 @@ dependencies:
   cupertino_onboarding:
     path: /Users/ivirtex/Desktop/Development/cupertino_onboarding
   cupertino_icons: ^1.0.5
+  modal_bottom_sheet: ^2.1.0
 
 dev_dependencies:
   bloc_test: ^9.0.3
