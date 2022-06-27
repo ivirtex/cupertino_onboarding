@@ -73,10 +73,10 @@ class CalendarHome extends StatelessWidget {
                     title: const Text("What's New Template"),
                     features: const [
                       WhatsNew(
-                        title: Text('iOS Styled Template'),
+                        title: Text('Showcase your App Features'),
                         description: Text(
                             'Clean and minimalistic iOS styled template for showing app features e.g. in a new update.'),
-                        icon: Icon(CupertinoIcons.square_arrow_down),
+                        icon: Icon(CupertinoIcons.star),
                       ),
                       WhatsNew(
                         title: Text("Styled Icons and Buttons"),
