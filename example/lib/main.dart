@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CupertinoApp(
       title: 'Calendar Onboarding Example',
+      debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.systemRed,
       ),
@@ -68,9 +69,49 @@ class CalendarHome extends StatelessWidget {
                       ),
                     ],
                   ),
+                  WhatsNewPage(
+                    title: const Text("What's New Template"),
+                    features: const [
+                      WhatsNew(
+                        title: Text('iOS Styled Template'),
+                        description: Text(
+                            'Clean and minimalistic iOS styled template for showing app features e.g. in a new update.'),
+                        icon: Icon(CupertinoIcons.square_arrow_down),
+                      ),
+                      WhatsNew(
+                        title: Text("Styled Icons and Buttons"),
+                        description: Text(
+                            "To create consistent look, icons and buttons are styled to match your CupertinoTheme's primaryColor. "),
+                        icon: Icon(CupertinoIcons.paintbrush),
+                      ),
+                      WhatsNew(
+                        title: Text('Style Flexiblity'),
+                        description: Text(
+                            "What's New Template can be styled to match new and old iOS versions of onboarding or your own preferencees."),
+                        icon: Icon(CupertinoIcons.gear),
+                      ),
+                    ],
+                  ),
                   const CupertinoOnboardingPage(
-                    title: Text('Next page'),
-                    body: Text('This is the next page'),
+                    title: Text('Support For Multiple Pages'),
+                    body: Icon(
+                      CupertinoIcons.square_stack_3d_down_right,
+                      size: 250,
+                    ),
+                  ),
+                  const CupertinoOnboardingPage(
+                    title: Text('Great Look in Light and Dark Mode'),
+                    body: Icon(
+                      CupertinoIcons.sun_max,
+                      size: 250,
+                    ),
+                  ),
+                  const CupertinoOnboardingPage(
+                    title: Text('Beautiful and Consistent Appearance'),
+                    body: Icon(
+                      CupertinoIcons.check_mark_circled,
+                      size: 250,
+                    ),
                   ),
                 ],
               ),

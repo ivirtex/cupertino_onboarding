@@ -9,13 +9,16 @@ import 'package:cupertino_onboarding/cupertino_onboarding.dart';
 /// It is possible to restyle this widget to match older iOS versions.
 class WhatsNewPage extends StatelessWidget {
   /// Default constructor of the [WhatsNewPage] widget.
+  ///
+  /// Represents an "What's new" screen in iOS 15 style.
+  /// It is possible to restyle this widget to match older iOS versions.
   WhatsNewPage({
     this.title = const Text("What's New"),
-    this.features,
+    required this.features,
     super.key,
   }) : assert(
-          features != null || features!.isNotEmpty,
-          'Feature list cannot be empty.',
+          features.isNotEmpty,
+          'Feature list must contain at least 1 widget.',
         );
 
   /// Title of the onboarding.
@@ -29,7 +32,7 @@ class WhatsNewPage extends StatelessWidget {
 
   /// List of `WhatsNew` widgets that will be displayed
   /// under the title.
-  final List<WhatsNew>? features;
+  final List<WhatsNew> features;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +42,9 @@ class WhatsNewPage extends StatelessWidget {
       title: title,
       body: ListView.separated(
         separatorBuilder: (_, __) => _featuresSeparator,
-        itemCount: features!.length,
+        itemCount: features.length,
         itemBuilder: (context, index) {
-          return features![index];
+          return features[index];
         },
       ),
     );

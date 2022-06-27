@@ -28,6 +28,9 @@ final CupertinoDynamicColor _kInactiveDotColor =
 /// It is possible to restyle this widget to match older iOS versions.
 class CupertinoOnboarding extends StatefulWidget {
   /// Default constructor of the [CupertinoOnboarding] widget.
+  /// Works great with `modal_bottom_sheet` package.
+  ///
+  /// It is possible to restyle this widget to match older iOS versions.
   CupertinoOnboarding({
     required this.pages,
     this.backgroundColor,
