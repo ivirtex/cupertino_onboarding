@@ -4,6 +4,11 @@ analyzer:
   plugins:
     - dart_code_metrics
 
+linter:
+  rules:
+    # We sort by import type
+    directives_ordering: false
+
 dart_code_metrics:
   anti-patterns:
     - long-method

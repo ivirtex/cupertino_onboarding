@@ -1,5 +1,8 @@
-import 'package:dots_indicator/dots_indicator.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
+
+// Package imports:
+import 'package:dots_indicator/dots_indicator.dart';
 
 final CupertinoDynamicColor _kBackgroundColor =
     CupertinoDynamicColor.withBrightness(
@@ -20,6 +23,7 @@ final CupertinoDynamicColor _kInactiveDotColor =
 );
 
 /// Represents an onboarding screen in iOS 15 style.
+/// Works great with `modal_bottom_sheet` package.
 ///
 /// It is possible to restyle this widget to match older iOS versions.
 class CupertinoOnboarding extends StatefulWidget {
@@ -32,8 +36,8 @@ class CupertinoOnboarding extends StatefulWidget {
     this.bottomButtonPadding,
     this.pageTransitionAnimationDuration = const Duration(milliseconds: 500),
     this.pageTransitionAnimationCurve = Curves.easeInOut,
-    this.onContinue,
-    this.onContinueOnLastPage,
+    this.onPressed,
+    this.onPressedOnLastPage,
     super.key,
   }) : assert(
           pages.isNotEmpty,
@@ -42,8 +46,8 @@ class CupertinoOnboarding extends StatefulWidget {
 
   /// List of Widgets that will be displayed as pages.
   ///
-  /// Preferably, list of `CupertinoOnboardingPage` widgets
-  /// or `WhatsNewPage`.
+  /// Preferably, list of `CupertinoOnboardingPage`
+  /// or `WhatsNewPage` widgets.
   final List<Widget> pages;
 
   /// Background color of the onboarding screen.
@@ -85,7 +89,7 @@ class CupertinoOnboarding extends StatefulWidget {
   /// Invoked when the user taps on the bottom button.
   ///
   /// By default, it will navigate to the next page.
-  final VoidCallback? onContinue;
+  final VoidCallback? onPressed;
 
   /// Invoked when the user taps on the bottom button on the last page.
   /// Must not be null to be active.
@@ -93,7 +97,7 @@ class CupertinoOnboarding extends StatefulWidget {
   /// E.g. use `() => Navigator.of(context).pop()` to close the onboarding
   /// or use `setState` with changed state boolean to re-render the parent
   /// widget and conditionally display other widget instead of the onboarding.
-  final VoidCallback? onContinueOnLastPage;
+  final VoidCallback? onPressedOnLastPage;
 
   @override
   State<CupertinoOnboarding> createState() => _CupertinoOnboardingState();
@@ -162,8 +166,8 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                       BorderRadius.circular(15),
                   padding: const EdgeInsets.all(16),
                   onPressed: _currentPage == widget.pages.length - 1
-                      ? widget.onContinueOnLastPage
-                      : widget.onContinue ?? _animateToNextPage,
+                      ? widget.onPressedOnLastPage
+                      : widget.onPressed ?? _animateToNextPage,
                   child: DefaultTextStyle(
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,

@@ -38,7 +38,7 @@ class CalendarHome extends StatelessWidget {
             showCupertinoModalBottomSheet<void>(
               context: context,
               builder: (_) => CupertinoOnboarding(
-                onContinueOnLastPage: () => Navigator.pop(context),
+                onPressedOnLastPage: () => Navigator.pop(context),
                 pages: [
                   WhatsNewPage(
                     title: const Text(

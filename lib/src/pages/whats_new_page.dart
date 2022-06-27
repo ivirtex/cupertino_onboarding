@@ -1,5 +1,8 @@
-import 'package:cupertino_onboarding/cupertino_onboarding.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
+
+// Project imports:
+import 'package:cupertino_onboarding/cupertino_onboarding.dart';
 
 /// Represents an "What's new" screen in iOS 15 style.
 ///
@@ -24,7 +27,7 @@ class WhatsNewPage extends StatelessWidget {
   /// defaultly styled to match the iOS 15 style.
   final Widget title;
 
-  /// List of `OnboardingFeature` widgets that will be displayed
+  /// List of `WhatsNew` widgets that will be displayed
   /// under the title.
   final List<WhatsNew>? features;
 
