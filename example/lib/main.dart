@@ -45,21 +45,21 @@ class CalendarHome extends StatelessWidget {
                       "What's New in Calendar",
                     ),
                     features: const [
-                      OnboardingFeature(
+                      WhatsNew(
                         icon: Icon(CupertinoIcons.mail),
                         title: Text('Found Events'),
                         description: Text(
                           'Siri suggests events found in Mail, Messages, and Safari, so you can add them easily, such as flight reservations and hotel bookings.',
                         ),
                       ),
-                      OnboardingFeature(
+                      WhatsNew(
                         icon: Icon(CupertinoIcons.time),
                         title: Text('Time to Leave'),
                         description: Text(
                           "Calendar uses Apple Maps to look up locations, traffic conditions, and transit options to tell you when it's time to leave.",
                         ),
                       ),
-                      OnboardingFeature(
+                      WhatsNew(
                         icon: Icon(CupertinoIcons.location),
                         title: Text('Location Suggestions'),
                         description: Text(
@@ -69,8 +69,8 @@ class CalendarHome extends StatelessWidget {
                     ],
                   ),
                   const CupertinoOnboardingPage(
-                    title: Text('Permissions'),
-                    body: Text('Permissions screen'),
+                    title: Text('Next page'),
+                    body: Text('This is the next page'),
                   ),
                 ],
               ),

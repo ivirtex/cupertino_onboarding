@@ -41,6 +41,9 @@ class CupertinoOnboarding extends StatefulWidget {
         );
 
   /// List of Widgets that will be displayed as pages.
+  ///
+  /// Preferably, list of `CupertinoOnboardingPage` widgets
+  /// or `WhatsNewPage`.
   final List<Widget> pages;
 
   /// Background color of the onboarding screen.
@@ -80,6 +83,7 @@ class CupertinoOnboarding extends StatefulWidget {
   final Curve pageTransitionAnimationCurve;
 
   /// Invoked when the user taps on the bottom button.
+  ///
   /// By default, it will navigate to the next page.
   final VoidCallback? onContinue;
 
@@ -175,7 +179,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

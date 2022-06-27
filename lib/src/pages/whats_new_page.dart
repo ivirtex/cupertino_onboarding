@@ -9,7 +9,6 @@ class WhatsNewPage extends StatelessWidget {
   WhatsNewPage({
     this.title = const Text("What's New"),
     this.features,
-    this.backgroundColor,
     super.key,
   }) : assert(
           features != null || features!.isNotEmpty,
@@ -27,15 +26,7 @@ class WhatsNewPage extends StatelessWidget {
 
   /// List of `OnboardingFeature` widgets that will be displayed
   /// under the title.
-  final List<OnboardingFeature>? features;
-
-  /// Background color of the onboarding screen.
-  ///
-  /// Defaults to the iOS style.
-  ///
-  /// The background color of the bottom button is derived
-  /// from the [CupertinoTheme]'s primaryColor.
-  final Color? backgroundColor;
+  final List<WhatsNew>? features;
 
   @override
   Widget build(BuildContext context) {

@@ -5,9 +5,9 @@ const double _kTitleToDescriptionSpacing = 2;
 const double _kIconSize = 35;
 
 /// Widget that represents a feature of the onboarding.
-class OnboardingFeature extends StatelessWidget {
+class WhatsNew extends StatelessWidget {
   /// Feature's default constructor.
-  const OnboardingFeature({
+  const WhatsNew({
     required this.title,
     required this.description,
     required this.icon,
@@ -64,7 +64,7 @@ class OnboardingFeature extends StatelessWidget {
                           CupertinoColors.secondaryLabel.resolveFrom(context),
                     ),
                     child: description,
-                  )
+                  ),
                 ],
               ),
             ),

@@ -1,1 +1,1 @@
-export 'onboarding_feature.dart';
+export 'whats_new.dart';

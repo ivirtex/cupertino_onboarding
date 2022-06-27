@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-/// Represents a swipeable page in the onboarding
+/// Represents a swipeable page in the onboarding.
 class CupertinoOnboardingPage extends StatelessWidget {
   /// Default constructor of the [CupertinoOnboardingPage] widget.
   const CupertinoOnboardingPage({
@@ -15,7 +15,7 @@ class CupertinoOnboardingPage extends StatelessWidget {
   ///
   /// Defaults to Text("What's New").
   /// If another Text widget is provided, it will be
-  /// defaultly styled to match the iOS 15 style.
+  /// defaultly styled to match the iOS 15 style onboarding.
   final Widget title;
 
   /// Body of the onboarding.
@@ -51,6 +51,7 @@ class CupertinoOnboardingPage extends StatelessWidget {
           Expanded(
             flex: 10,
             child: DefaultTextStyle(
+              // This is workaround for the https://github.com/flutter/flutter/issues/48438
               style: TextStyle(
                 color: CupertinoColors.label.resolveFrom(context),
               ),
