@@ -1,8 +1,8 @@
 // Flutter imports:
+import 'package:cupertino_onboarding/src/constants.dart';
 import 'package:flutter/cupertino.dart';
 
-const double _kIconToTextSpacing = 20;
-const double _kTitleToDescriptionSpacing = 2;
+const double _kIconToTextSpacing = 18;
 const double _kIconSize = 35;
 
 /// Widget that represents a feature of the onboarding.
@@ -51,18 +51,18 @@ class WhatsNew extends StatelessWidget {
                 children: [
                   DefaultTextStyle(
                     style: TextStyle(
+                      color: kBaseTextColor.resolveFrom(context),
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: CupertinoColors.label.resolveFrom(context),
+                      fontWeight: FontWeight.w600,
                     ),
                     child: title,
                   ),
-                  const SizedBox(height: _kTitleToDescriptionSpacing),
                   DefaultTextStyle(
                     style: TextStyle(
                       fontSize: 15,
-                      color:
-                          CupertinoColors.secondaryLabel.resolveFrom(context),
+                      height: 1.3,
+                      letterSpacing: -0.1,
+                      color: kDescriptionTextColor.resolveFrom(context),
                     ),
                     child: description,
                   ),

@@ -1,5 +1,8 @@
 // Flutter imports:
+import 'package:cupertino_onboarding/src/constants.dart';
 import 'package:flutter/cupertino.dart';
+
+const EdgeInsets _kOnboardingPagePadding = EdgeInsets.only(left: 35, right: 15);
 
 /// Represents a swipeable page in the onboarding.
 class CupertinoOnboardingPage extends StatelessWidget {
@@ -7,6 +10,8 @@ class CupertinoOnboardingPage extends StatelessWidget {
   const CupertinoOnboardingPage({
     required this.title,
     required this.body,
+    this.titleFlex = 3,
+    this.bodyPadding = _kOnboardingPagePadding,
     super.key,
   });
 
@@ -22,45 +27,54 @@ class CupertinoOnboardingPage extends StatelessWidget {
   /// Body of the onboarding.
   final Widget body;
 
+  /// Flex value of the title.
+  ///
+  /// Detrmines how much horizontal space the title takes.
+  ///
+  /// Defaults to 3.
+  final int titleFlex;
+
+  /// Padding of the body.
+  final EdgeInsets bodyPadding;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        children: [
-          const Spacer(flex: 2),
-          DefaultTextStyle(
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: CupertinoColors.label.resolveFrom(context),
-              fontWeight: FontWeight.w700,
-              letterSpacing: -2,
-              fontSize: 35,
-            ),
-            child: Row(
-              children: [
-                const Spacer(),
-                Expanded(
-                  flex: 4,
-                  child: title,
-                ),
-                const Spacer(),
-              ],
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 80),
+        DefaultTextStyle(
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: kBaseTextColor.resolveFrom(context),
+            fontWeight: FontWeight.w700,
+            letterSpacing: -1,
+            fontSize: 35,
           ),
-          const Spacer(),
-          Expanded(
-            flex: 10,
-            child: DefaultTextStyle(
-              // This is workaround for the https://github.com/flutter/flutter/issues/48438
-              style: TextStyle(
-                color: CupertinoColors.label.resolveFrom(context),
+          child: Row(
+            children: [
+              const Spacer(),
+              Expanded(
+                flex: 3,
+                child: title,
               ),
+              const Spacer(),
+            ],
+          ),
+        ),
+        const SizedBox(height: 55),
+        Expanded(
+          flex: 10,
+          child: DefaultTextStyle(
+            style: TextStyle(
+              color: kBaseTextColor.resolveFrom(context),
+            ),
+            child: Padding(
+              padding: bodyPadding,
               child: body,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

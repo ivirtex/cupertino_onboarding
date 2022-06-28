@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 // Package imports:
 import 'package:dots_indicator/dots_indicator.dart';
 
+// Estimated from the iPhone Simulator running iOS 15
 final CupertinoDynamicColor _kBackgroundColor =
     CupertinoDynamicColor.withBrightness(
   color: CupertinoColors.white,
@@ -15,11 +16,19 @@ final CupertinoDynamicColor _kActiveDotColor =
   color: CupertinoColors.systemGrey2.darkColor,
   darkColor: CupertinoColors.systemGrey2.color,
 );
-
 final CupertinoDynamicColor _kInactiveDotColor =
     CupertinoDynamicColor.withBrightness(
   color: CupertinoColors.systemGrey2.color,
   darkColor: CupertinoColors.systemGrey2.darkColor,
+);
+
+const Size _kDotSize = Size(8, 8);
+
+final BorderRadius _bottomButtonBorderRadius = BorderRadius.circular(15);
+const EdgeInsets _kBottomButtonPadding = EdgeInsets.only(
+  left: 22,
+  right: 22,
+  bottom: 60,
 );
 
 /// Represents an onboarding screen in iOS 15 style.
@@ -34,9 +43,9 @@ class CupertinoOnboarding extends StatefulWidget {
   CupertinoOnboarding({
     required this.pages,
     this.backgroundColor,
-    this.bottomButtonChild,
+    this.bottomButtonChild = const Text('Continue'),
     this.bottomButtonBorderRadius,
-    this.bottomButtonPadding,
+    this.bottomButtonPadding = _kBottomButtonPadding,
     this.pageTransitionAnimationDuration = const Duration(milliseconds: 500),
     this.pageTransitionAnimationCurve = Curves.easeInOut,
     this.onPressed,
@@ -64,20 +73,18 @@ class CupertinoOnboarding extends StatefulWidget {
   /// Child used in the next button.
   ///
   /// Default to the Text('Continue') widget.
-  final Widget? bottomButtonChild;
+  final Widget bottomButtonChild;
 
   /// Border radius of the next button.
   ///
-  /// Can't match native iOS look, because as of 3.0.2 Flutter
+  /// Can't match native iOS look, because as of 3.0.3 Flutter
   /// still uses rounded rectangle shape for [CupertinoButton]
   /// instead of squircle paths.
   /// https://github.com/flutter/flutter/issues/13914
   final BorderRadius? bottomButtonBorderRadius;
 
   /// Padding of the bottom button.
-  ///
-  /// Defaults to `const EdgeInsets.only(bottom: 60)`.
-  final EdgeInsets? bottomButtonPadding;
+  final EdgeInsets bottomButtonPadding;
 
   /// Duration that is used to animate the transition between pages.
   ///
@@ -151,39 +158,38 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                 decorator: DotsDecorator(
                   activeColor: _kActiveDotColor.resolveFrom(context),
                   color: _kInactiveDotColor.resolveFrom(context),
-                  activeSize: const Size(8, 8),
-                  size: const Size(8, 8),
+                  activeSize: _kDotSize,
+                  size: _kDotSize,
                 ),
               ),
             const SizedBox(height: 15),
             Center(
               child: Padding(
-                padding: widget.bottomButtonPadding ??
-                    const EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                      bottom: 60,
+                padding: widget.bottomButtonPadding,
+                child: Column(
+                  children: [
+                    CupertinoButton.filled(
+                      borderRadius: widget.bottomButtonBorderRadius ??
+                          _bottomButtonBorderRadius,
+                      padding: const EdgeInsets.all(16),
+                      onPressed: _currentPage == widget.pages.length - 1
+                          ? widget.onPressedOnLastPage
+                          : widget.onPressed ?? _animateToNextPage,
+                      child: DefaultTextStyle(
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                        child: Row(
+                          children: [
+                            const Spacer(),
+                            widget.bottomButtonChild,
+                            const Spacer(),
+                          ],
+                        ),
+                      ),
                     ),
-                child: CupertinoButton.filled(
-                  borderRadius: widget.bottomButtonBorderRadius ??
-                      BorderRadius.circular(15),
-                  padding: const EdgeInsets.all(16),
-                  onPressed: _currentPage == widget.pages.length - 1
-                      ? widget.onPressedOnLastPage
-                      : widget.onPressed ?? _animateToNextPage,
-                  child: DefaultTextStyle(
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                    child: Row(
-                      children: [
-                        const Spacer(),
-                        widget.bottomButtonChild ?? const Text('Continue'),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ),
