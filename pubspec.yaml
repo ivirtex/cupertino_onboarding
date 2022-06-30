@@ -1,6 +1,6 @@
 name: cupertino_onboarding
 description: Flutter package that provides an iOS-style onboarding experience.
-version: 1.0.0+1
+version: 1.0.0
 publish_to: none
 
 environment:

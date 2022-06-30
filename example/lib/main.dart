@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Calendar Onboarding Example',
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
-        primaryColor: CupertinoColors.systemRed,
+        primaryColor: CupertinoColors.systemBlue,
         // brightness: Brightness.dark,
       ),
       home: CalendarHome(),
@@ -37,14 +37,24 @@ class CalendarHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CupertinoButton(
-              child: const Text('Show Calendar Onboarding'),
+              child: Text(
+                'Show Calendar Onboarding',
+                style: TextStyle(
+                  color: CupertinoColors.systemRed.resolveFrom(context),
+                ),
+              ),
               onPressed: () => showCupertinoModalBottomSheet(
                 context: context,
                 builder: (_) => const CalendarOnboarding(),
               ),
             ),
             CupertinoButton(
-              child: const Text('Show Translator Onboarding'),
+              child: Text(
+                'Show Translator Onboarding',
+                style: TextStyle(
+                  color: CupertinoColors.systemTeal.resolveFrom(context),
+                ),
+              ),
               onPressed: () => showCupertinoModalBottomSheet(
                 context: context,
                 builder: (_) => const TranslatorOnboarding(),
@@ -92,7 +102,7 @@ class OnboardingOverview extends StatelessWidget {
             WhatsNewFeature(
               title: Text('Style Flexiblity'),
               description: Text(
-                  "What's New Template can be styled to match new and old iOS versions of onboarding or your own preferencees."),
+                  "What's New Template can be styled to match new and old iOS versions of onboarding or your own preferences."),
               icon: Icon(CupertinoIcons.gear),
             ),
           ],
@@ -159,33 +169,33 @@ class TranslatorOnboarding extends StatelessWidget {
           ),
           features: [
             WhatsNewFeature(
-              title: const Text('Conversation Views'),
-              description: const Text(
-                'Choose a side-by-side or face-to-face conversation view.',
-              ),
               icon: Icon(
                 CupertinoIcons.rectangle_dock,
                 color: CupertinoColors.systemTeal.resolveFrom(context),
               ),
+              title: const Text('Conversation Views'),
+              description: const Text(
+                'Choose a side-by-side or face-to-face conversation view.',
+              ),
             ),
             WhatsNewFeature(
-              title: const Text('Auto Translate'),
-              description: const Text(
-                'Respond in conversations without tapping the microphone button.',
-              ),
               icon: Icon(
                 CupertinoIcons.mic,
                 color: CupertinoColors.systemTeal.resolveFrom(context),
               ),
+              title: const Text('Auto Translate'),
+              description: const Text(
+                'Respond in conversations without tapping the microphone button.',
+              ),
             ),
             WhatsNewFeature(
-              title: const Text('System-Wide Translation'),
-              description: const Text(
-                'Translate selected text anywhere on your iPhone.',
-              ),
               icon: Icon(
                 CupertinoIcons.device_phone_portrait,
                 color: CupertinoColors.systemTeal.resolveFrom(context),
+              ),
+              title: const Text('System-Wide Translation'),
+              description: const Text(
+                'Translate selected text anywhere on your iPhone.',
               ),
             ),
           ],
@@ -203,31 +213,41 @@ class CalendarOnboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
+      bottomButtonColor: CupertinoColors.systemRed.resolveFrom(context),
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
         WhatsNewPage(
           title: const Text(
             "What's New in Calendar",
           ),
-          features: const [
+          features: [
             WhatsNewFeature(
-              icon: Icon(CupertinoIcons.mail),
-              title: Text('Found Events'),
-              description: Text(
+              icon: Icon(
+                CupertinoIcons.mail,
+                color: CupertinoColors.systemRed.resolveFrom(context),
+              ),
+              title: const Text('Found Events'),
+              description: const Text(
                 'Siri suggests events found in Mail, Messages, and Safari, so you can add them easily, such as flight reservations and hotel bookings.',
               ),
             ),
             WhatsNewFeature(
-              icon: Icon(CupertinoIcons.time),
-              title: Text('Time to Leave'),
-              description: Text(
+              icon: Icon(
+                CupertinoIcons.time,
+                color: CupertinoColors.systemRed.resolveFrom(context),
+              ),
+              title: const Text('Time to Leave'),
+              description: const Text(
                 "Calendar uses Apple Maps to look up locations, traffic conditions, and transit options to tell you when it's time to leave.",
               ),
             ),
             WhatsNewFeature(
-              icon: Icon(CupertinoIcons.location),
-              title: Text('Location Suggestions'),
-              description: Text(
+              icon: Icon(
+                CupertinoIcons.location,
+                color: CupertinoColors.systemRed.resolveFrom(context),
+              ),
+              title: const Text('Location Suggestions'),
+              description: const Text(
                 'Calendar suggests locations based on your past events and significant locations.',
               ),
             ),

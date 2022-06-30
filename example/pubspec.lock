@@ -49,7 +49,7 @@ packages:
       path: "/Users/ivirtex/Desktop/Development/cupertino_onboarding"
       relative: false
     source: path
-    version: "1.0.0+1"
+    version: "1.0.0"
   dots_indicator:
     dependency: transitive
     description:
