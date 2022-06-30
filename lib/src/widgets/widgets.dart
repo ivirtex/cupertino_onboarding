@@ -1,1 +1,1 @@
-export 'whats_new.dart';
+export 'whats_new_feature.dart';

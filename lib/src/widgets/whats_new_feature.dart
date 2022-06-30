@@ -6,9 +6,9 @@ const double _kIconToTextSpacing = 18;
 const double _kIconSize = 35;
 
 /// Widget that represents a feature of the onboarding.
-class WhatsNew extends StatelessWidget {
+class WhatsNewFeature extends StatelessWidget {
   /// Feature's default constructor.
-  const WhatsNew({
+  const WhatsNewFeature({
     required this.title,
     required this.description,
     required this.icon,

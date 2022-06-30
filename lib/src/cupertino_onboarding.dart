@@ -44,8 +44,10 @@ class CupertinoOnboarding extends StatefulWidget {
     required this.pages,
     this.backgroundColor,
     this.bottomButtonChild = const Text('Continue'),
+    this.bottomButtonColor,
     this.bottomButtonBorderRadius,
     this.bottomButtonPadding = _kBottomButtonPadding,
+    this.widgetAboveBottomButton,
     this.pageTransitionAnimationDuration = const Duration(milliseconds: 500),
     this.pageTransitionAnimationCurve = Curves.easeInOut,
     this.onPressed,
@@ -65,15 +67,18 @@ class CupertinoOnboarding extends StatefulWidget {
   /// Background color of the onboarding screen.
   ///
   /// Defaults to the iOS style.
-  ///
-  /// The background color of the bottom button is derived
-  /// from the [CupertinoTheme]'s primaryColor.
   final Color? backgroundColor;
 
-  /// Child used in the next button.
+  /// Child used in the bottom button.
   ///
   /// Default to the Text('Continue') widget.
   final Widget bottomButtonChild;
+
+  /// Background color of the bottom button.
+  ///
+  /// Default color is derived
+  /// from the [CupertinoTheme]'s primaryColor.
+  final Color? bottomButtonColor;
 
   /// Border radius of the next button.
   ///
@@ -86,6 +91,11 @@ class CupertinoOnboarding extends StatefulWidget {
   /// Padding of the bottom button.
   final EdgeInsets bottomButtonPadding;
 
+  /// Widget that is placed above the bottom button.
+  ///
+  /// E.g. a [CupertinoButton] that links to the privacy policy page.
+  final Widget? widgetAboveBottomButton;
+
   /// Duration that is used to animate the transition between pages.
   ///
   /// Defaults to `const Duration(milliseconds: 500)`.
@@ -93,10 +103,11 @@ class CupertinoOnboarding extends StatefulWidget {
 
   /// Animation curve that is used to animate the transition between pages.
   ///
-  /// Defaults to `Curves.easeInOut`.
+  /// Defaults to [Curves.easeInOut].
   final Curve pageTransitionAnimationCurve;
 
   /// Invoked when the user taps on the bottom button.
+  /// Usable only if [pages] length is greater than 1.
   ///
   /// By default, it will navigate to the next page.
   final VoidCallback? onPressed;
@@ -104,7 +115,7 @@ class CupertinoOnboarding extends StatefulWidget {
   /// Invoked when the user taps on the bottom button on the last page.
   /// Must not be null to be active.
   ///
-  /// E.g. use `() => Navigator.of(context).pop()` to close the onboarding
+  /// E.g. use [Navigator.pop] to close the onboarding after navigating to it
   /// or use `setState` with changed state boolean to re-render the parent
   /// widget and conditionally display other widget instead of the onboarding.
   final VoidCallback? onPressedOnLastPage;
@@ -162,15 +173,20 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                   size: _kDotSize,
                 ),
               ),
-            const SizedBox(height: 15),
+            if (widget.widgetAboveBottomButton != null)
+              widget.widgetAboveBottomButton!
+            else
+              const SizedBox(height: 15),
             Center(
               child: Padding(
                 padding: widget.bottomButtonPadding,
                 child: Column(
                   children: [
-                    CupertinoButton.filled(
+                    CupertinoButton(
                       borderRadius: widget.bottomButtonBorderRadius ??
                           _bottomButtonBorderRadius,
+                      color: widget.bottomButtonColor ??
+                          CupertinoTheme.of(context).primaryColor,
                       padding: const EdgeInsets.all(16),
                       onPressed: _currentPage == widget.pages.length - 1
                           ? widget.onPressedOnLastPage

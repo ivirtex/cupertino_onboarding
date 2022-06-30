@@ -32,7 +32,7 @@ class WhatsNewPage extends StatelessWidget {
 
   /// List of `WhatsNew` widgets that will be displayed
   /// under the title.
-  final List<WhatsNew> features;
+  final List<WhatsNewFeature> features;
 
   @override
   Widget build(BuildContext context) {
