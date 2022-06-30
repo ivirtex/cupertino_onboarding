@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.systemRed,
-        brightness: Brightness.dark,
+        // brightness: Brightness.dark,
       ),
       home: CalendarHome(),
     );
