@@ -46,9 +46,9 @@ packages:
   cupertino_onboarding:
     dependency: "direct main"
     description:
-      path: "/Users/ivirtex/Desktop/Development/cupertino_onboarding"
-      relative: false
-    source: path
+      name: cupertino_onboarding
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0"
   dots_indicator:
     dependency: transitive

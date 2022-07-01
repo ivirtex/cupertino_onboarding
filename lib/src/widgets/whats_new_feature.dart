@@ -1,6 +1,8 @@
 // Flutter imports:
-import 'package:cupertino_onboarding/src/constants.dart';
 import 'package:flutter/cupertino.dart';
+
+// Project imports:
+import 'package:cupertino_onboarding/src/constants.dart';
 
 const double _kIconToTextSpacing = 18;
 const double _kIconSize = 35;

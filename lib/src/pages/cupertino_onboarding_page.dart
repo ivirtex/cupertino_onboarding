@@ -1,6 +1,8 @@
 // Flutter imports:
-import 'package:cupertino_onboarding/src/constants.dart';
 import 'package:flutter/cupertino.dart';
+
+// Project imports:
+import 'package:cupertino_onboarding/src/constants.dart';
 
 const EdgeInsets _kOnboardingPagePadding = EdgeInsets.only(left: 35, right: 15);
 

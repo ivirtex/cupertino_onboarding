@@ -1,6 +1,8 @@
 # cupertino_onboarding
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
+![pub.dev badge](https://img.shields.io/pub/v/cupertino_onboarding)
+![GitHub build status](https://img.shields.io/github/workflow/status/ivirtex/cupertino_onboarding/Flutter)
 [![License: MIT][license_badge]][license_link]
 
 Flutter package that provides a beautiful, iOS-like, easy onboarding experience with minimal code.
