@@ -16,7 +16,7 @@ It's designed to easily showcase your app's features and provide a simple way fo
 Add the package to your pubspec.yaml file:
 
 ```yaml
-cupertino_onboarding: ^1.0.0
+cupertino_onboarding: ^1.0.2
 ```
 
 Import the library:

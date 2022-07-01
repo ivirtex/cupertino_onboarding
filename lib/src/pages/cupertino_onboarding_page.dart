@@ -6,14 +6,17 @@ import 'package:cupertino_onboarding/src/constants.dart';
 
 const EdgeInsets _kOnboardingPagePadding = EdgeInsets.only(left: 35, right: 15);
 
+const double _kTitleToBodySpacing = 55;
+
 /// Represents a swipeable page in the onboarding.
 class CupertinoOnboardingPage extends StatelessWidget {
   /// Default constructor of the [CupertinoOnboardingPage] widget.
   const CupertinoOnboardingPage({
     required this.title,
     required this.body,
-    this.titleFlex = 3,
     this.bodyPadding = _kOnboardingPagePadding,
+    this.titleToBodySpacing = _kTitleToBodySpacing,
+    this.titleFlex = 3,
     super.key,
   });
 
@@ -29,15 +32,20 @@ class CupertinoOnboardingPage extends StatelessWidget {
   /// Body of the onboarding.
   final Widget body;
 
+  /// Padding of the body.
+  final EdgeInsets bodyPadding;
+
+  /// Spacing between the title and the body.
+  ///
+  /// Defaults to 55.
+  final double titleToBodySpacing;
+
   /// Flex value of the title.
   ///
-  /// Detrmines how much horizontal space the title takes.
+  /// Determines how much horizontal space the title takes.
   ///
   /// Defaults to 3.
   final int titleFlex;
-
-  /// Padding of the body.
-  final EdgeInsets bodyPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +71,7 @@ class CupertinoOnboardingPage extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 55),
+        SizedBox(height: titleToBodySpacing),
         Expanded(
           flex: 10,
           child: DefaultTextStyle(
