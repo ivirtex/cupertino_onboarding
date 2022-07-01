@@ -217,9 +217,7 @@ class CalendarOnboarding extends StatelessWidget {
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
         WhatsNewPage(
-          title: const Text(
-            "What's New in Calendar",
-          ),
+          title: const Text("What's New in Calendar"),
           features: [
             WhatsNewFeature(
               icon: Icon(
