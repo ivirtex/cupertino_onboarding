@@ -45,6 +45,7 @@ class CalendarHome extends StatelessWidget {
               ),
               onPressed: () => showCupertinoModalBottomSheet(
                 context: context,
+                enableDrag: false,
                 builder: (_) => const CalendarOnboarding(),
               ),
             ),
@@ -57,6 +58,7 @@ class CalendarHome extends StatelessWidget {
               ),
               onPressed: () => showCupertinoModalBottomSheet(
                 context: context,
+                enableDrag: false,
                 builder: (_) => const TranslatorOnboarding(),
               ),
             ),
@@ -64,6 +66,7 @@ class CalendarHome extends StatelessWidget {
               child: const Text('Show Onboarding Overview'),
               onPressed: () => showCupertinoModalBottomSheet<void>(
                 context: context,
+                enableDrag: false,
                 builder: (_) => const OnboardingOverview(),
               ),
             ),
