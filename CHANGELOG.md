@@ -1,3 +1,7 @@
+## 1.1.1
+
+- `WhatsNewPage` no longer requires `features` parameter to be type of `List<WhatsNewFeature>`.
+
 ## 1.1.0
 
 - Added `titleTopIndent` and `bodyToBottomSpacing` parameters to `CupertinoOnboardingPage`,

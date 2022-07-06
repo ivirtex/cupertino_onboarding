@@ -45,7 +45,7 @@ class WhatsNewPage extends StatelessWidget {
   /// under the title.
   ///
   /// Preferably, list of [WhatsNewFeature] widgets.
-  final List<WhatsNewFeature> features;
+  final List<Widget> features;
 
   /// Padding of the body.
   final EdgeInsets bodyPadding;
