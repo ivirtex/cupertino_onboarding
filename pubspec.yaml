@@ -16,4 +16,4 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   import_sorter: ^4.6.0
-  very_good_analysis: ^3.0.1
+  very_good_analysis: ">=3.0.1 <5.0.0"
