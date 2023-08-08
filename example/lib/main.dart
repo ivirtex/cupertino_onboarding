@@ -12,19 +12,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
-      title: 'Calendar Onboarding Example',
-      debugShowCheckedModeBanner: false,
-      theme: CupertinoThemeData(
-        primaryColor: CupertinoColors.systemBlue,
-        // brightness: Brightness.dark,
+      title: 'Onboarding Example',
+      home: CupertinoScaffold(
+        body: AppHome(),
       ),
-      home: CalendarHome(),
     );
   }
 }
 
-class CalendarHome extends StatelessWidget {
-  const CalendarHome({Key? key}) : super(key: key);
+class AppHome extends StatelessWidget {
+  const AppHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +40,8 @@ class CalendarHome extends StatelessWidget {
                   color: CupertinoColors.systemRed.resolveFrom(context),
                 ),
               ),
-              onPressed: () => showCupertinoModalBottomSheet(
+              onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
                 context: context,
-                enableDrag: false,
                 builder: (_) => const CalendarOnboarding(),
               ),
             ),
@@ -56,17 +52,21 @@ class CalendarHome extends StatelessWidget {
                   color: CupertinoColors.systemTeal.resolveFrom(context),
                 ),
               ),
-              onPressed: () => showCupertinoModalBottomSheet(
+              onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
                 context: context,
-                enableDrag: false,
                 builder: (_) => const TranslatorOnboarding(),
               ),
             ),
             CupertinoButton(
-              child: const Text('Show Onboarding Overview'),
-              onPressed: () => showCupertinoModalBottomSheet<void>(
+              child: Text(
+                'Show Onboarding Overview',
+                style: TextStyle(
+                  color: CupertinoColors.systemBlue.resolveFrom(context),
+                ),
+              ),
+              onPressed: () =>
+                  CupertinoScaffold.showCupertinoModalBottomSheet<void>(
                 context: context,
-                enableDrag: false,
                 builder: (_) => const OnboardingOverview(),
               ),
             ),
@@ -88,6 +88,7 @@ class OnboardingOverview extends StatelessWidget {
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
         WhatsNewPage(
+          scrollPhysics: const BouncingScrollPhysics(),
           title: const Text("What's New Template"),
           features: const [
             WhatsNewFeature(
