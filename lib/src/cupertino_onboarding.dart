@@ -49,7 +49,8 @@ class CupertinoOnboarding extends StatefulWidget {
     this.bottomButtonPadding = _kBottomButtonPadding,
     this.widgetAboveBottomButton,
     this.pageTransitionAnimationDuration = const Duration(milliseconds: 500),
-    this.pageTransitionAnimationCurve = Curves.easeInOut,
+    this.pageTransitionAnimationCurve = Curves.fastEaseInToSlowEaseOut,
+    this.scrollPhysics = const BouncingScrollPhysics(),
     this.onPressed,
     this.onPressedOnLastPage,
     super.key,
@@ -103,8 +104,14 @@ class CupertinoOnboarding extends StatefulWidget {
 
   /// Animation curve that is used to animate the transition between pages.
   ///
-  /// Defaults to [Curves.easeInOut].
+  /// Defaults to [Curves.fastEaseInToSlowEaseOut].
   final Curve pageTransitionAnimationCurve;
+
+  /// The physics to use for horizontal
+  /// scrolling between the pages.
+  ///
+  /// Defaults to [BouncingScrollPhysics].
+  final ScrollPhysics scrollPhysics;
 
   /// Invoked when the user taps on the bottom button.
   /// Usable only if [pages] length is greater than 1.
@@ -134,11 +141,9 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _pageController.addListener(() {
-        setState(() {
-          _currentPageAsDouble = _pageController.page!;
-        });
+    _pageController.addListener(() {
+      setState(() {
+        _currentPageAsDouble = _pageController.page!;
       });
     });
   }
@@ -152,7 +157,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
           children: [
             Expanded(
               child: PageView(
-                physics: const BouncingScrollPhysics(),
+                physics: widget.scrollPhysics,
                 controller: _pageController,
                 children: widget.pages,
                 onPageChanged: (page) {

@@ -19,18 +19,31 @@ class WhatsNewPage extends StatelessWidget {
   /// Represents an "What's new" screen in iOS 15 style.
   /// It is possible to restyle this widget to match older iOS versions.
   WhatsNewPage({
-    this.title = const Text("What's New"),
     required this.features,
+    this.featuresSeperator = const SizedBox(height: 25),
+    this.title = const Text("What's New"),
     this.bodyPadding = _kOnboardingPagePadding,
     this.titleTopIndent = _kTitleTopIndent,
     this.titleToBodySpacing = _kTitleToBodySpacing,
     this.bodyToBottomSpacing = 0,
     this.titleFlex = 3,
+    this.scrollPhysics = const BouncingScrollPhysics(),
     super.key,
   }) : assert(
           features.isNotEmpty,
           'Feature list must contain at least 1 widget.',
         );
+
+  /// List of widgets that will be displayed
+  /// under the title.
+  ///
+  /// Preferably, list of [WhatsNewFeature] widgets.
+  final List<Widget> features;
+
+  /// Widget that will be displayed between the features.
+  ///
+  /// Defaults to [SizedBox(height: 25)].
+  final Widget featuresSeperator;
 
   /// Title of the onboarding.
   ///
@@ -38,14 +51,8 @@ class WhatsNewPage extends StatelessWidget {
   ///
   /// Defaults to Text("What's New").
   /// If another Text widget is provided, it will be
-  /// defaultly styled to match the iOS 15 style.
+  /// defaultly styled to match the iOS style.
   final Widget title;
-
-  /// List of widgets that will be displayed
-  /// under the title.
-  ///
-  /// Preferably, list of [WhatsNewFeature] widgets.
-  final List<Widget> features;
 
   /// Padding of the body.
   final EdgeInsets bodyPadding;
@@ -72,10 +79,13 @@ class WhatsNewPage extends StatelessWidget {
   /// Defaults to 3.
   final int titleFlex;
 
+  /// The physics to use for the features section.
+  ///
+  /// Defaults to [BouncingScrollPhysics].
+  final ScrollPhysics scrollPhysics;
+
   @override
   Widget build(BuildContext context) {
-    const _featuresSeparator = SizedBox(height: 25);
-
     return CupertinoOnboardingPage(
       title: title,
       bodyPadding: bodyPadding,
@@ -84,7 +94,8 @@ class WhatsNewPage extends StatelessWidget {
       bodyToBottomSpacing: bodyToBottomSpacing,
       titleFlex: titleFlex,
       body: ListView.separated(
-        separatorBuilder: (_, __) => _featuresSeparator,
+        physics: scrollPhysics,
+        separatorBuilder: (_, __) => featuresSeperator,
         itemCount: features.length,
         itemBuilder: (context, index) {
           return features[index];
