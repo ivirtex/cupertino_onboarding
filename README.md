@@ -2,7 +2,7 @@
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 ![pub.dev badge](https://img.shields.io/pub/v/cupertino_onboarding)
-![GitHub build status](https://img.shields.io/github/workflow/status/ivirtex/cupertino_onboarding/Flutter)
+![GitHub build status](https://img.shields.io/github/actions/workflow/status/ivirtex/cupertino_onboarding/flutter.yml)
 [![License: MIT][license_badge]][license_link]
 
 Flutter package that provides a beautiful, iOS-like, easy onboarding experience with minimal code.
@@ -11,12 +11,15 @@ It's designed to easily showcase your app's features and provide a simple way fo
 
 <img src="https://github.com/ivirtex/cupertino_onboarding/blob/master/readme_media/onboarding.gif?raw=true" alt="onboarding example" width="50%"/>
 
+<img src="https://github.com/ivirtex/cupertino_onboarding/blob/master/readme_media/calendar.png?raw=true" alt="calendar example" width="75%"/>
+<img src="https://github.com/ivirtex/cupertino_onboarding/blob/master/readme_media/translator.png?raw=true" alt="translator example" width="75%"/>
+
 ## Getting Started
 
 Add the package to your pubspec.yaml file:
 
 ```yaml
-cupertino_onboarding: ^1.1.1
+cupertino_onboarding: ^1.2.0
 ```
 
 Import the library:
@@ -91,11 +94,6 @@ Widget build(BuildContext context) {
 
 See API reference for more information about customizing look and feel of the onboarding.
 
-## Examples
-
-<img src="https://github.com/ivirtex/cupertino_onboarding/blob/master/readme_media/calendar.png?raw=true" alt="calendar example" width="75%"/>
-<img src="https://github.com/ivirtex/cupertino_onboarding/blob/master/readme_media/translator.png?raw=true" alt="translator example" width="75%"/>
-
 ## Features, bugs and contributions
 
 Feel free to contribute to this project.
@@ -107,7 +105,7 @@ If you fixed a bug or implemented a feature by yourself, feel free to send a [pu
 
 I am working on my packages in my free time.
 
-If this package is helping you, please consider [buying me a coffee](ko-fi.com/ivirtex), so I can keep updating and maintaining this package.
+If this package is helping you, please consider [buying me a coffee](https://ko-fi.com/ivirtex), so I can keep updating and maintaining this package.
 
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
