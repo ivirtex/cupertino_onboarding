@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, lines_longer_than_80_chars
 
-// Package imports:
-import 'package:dots_indicator/dots_indicator.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Project imports:

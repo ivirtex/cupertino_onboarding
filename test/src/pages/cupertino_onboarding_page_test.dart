@@ -1,7 +1,12 @@
-import 'package:cupertino_onboarding/cupertino_onboarding.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
+
+// Project imports:
+import 'package:cupertino_onboarding/cupertino_onboarding.dart';
 
 void main() {
   group('CupertinoOnboardingPage', () {
