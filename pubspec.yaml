@@ -2,9 +2,13 @@ name: cupertino_onboarding
 description: Flutter package that provides an iOS-style onboarding experience.
 version: 1.2.0
 repository: https://github.com/ivirtex/cupertino_onboarding
+topics:
+  - onboarding
+  - ios
+  - native
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   dots_indicator: ^2.1.0
@@ -16,3 +20,7 @@ dev_dependencies:
     sdk: flutter
   import_sorter: ^4.6.0
   very_good_analysis: ^5.0.0+1
+
+screenshots:
+  - description: Screenshot from the example app.
+    path: readme_media/translator.png
