@@ -11,7 +11,7 @@ environment:
   sdk: ">=2.17.0 <4.0.0"
 
 dependencies:
-  dots_indicator: ^2.1.0
+  dots_indicator: ">=2.1.0 <4.0.0"
   flutter:
     sdk: flutter
 
