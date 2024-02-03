@@ -82,7 +82,7 @@ class CupertinoOnboardingPage extends StatelessWidget {
               children: [
                 const Spacer(),
                 Expanded(
-                  flex: 3,
+                  flex: titleFlex,
                   child: title,
                 ),
                 const Spacer(),
