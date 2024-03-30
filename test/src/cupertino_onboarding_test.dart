@@ -15,7 +15,10 @@ void main() {
   group('CupertinoOnboarding', () {
     test('throws assertion if number of pages is 0', () {
       expect(
-        () => CupertinoOnboarding(pages: const []),
+        () => CupertinoOnboarding(
+          controller: PageController(),
+          pages: const [],
+        ),
         throwsAssertionError,
       );
     });
@@ -25,6 +28,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: CupertinoOnboarding(
+            controller: PageController(),
             pages: [
               Container(color: Colors.blue),
               Container(color: Colors.red),
@@ -45,6 +49,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: CupertinoOnboarding(
+            controller: PageController(),
             pages: [
               Container(color: Colors.blue),
               Container(color: Colors.red),
@@ -74,6 +79,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: CupertinoOnboarding(
+            controller: PageController(),
             pages: [
               Container(color: Colors.blue),
             ],
@@ -98,6 +104,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: CupertinoOnboarding(
+            controller: PageController(),
             pages: [
               Container(color: Colors.blue),
               Container(color: Colors.red),
@@ -122,6 +129,7 @@ void main() {
         await tester.pumpWidget(
           CupertinoApp(
             home: CupertinoOnboarding(
+              controller: PageController(),
               pages: [
                 Container(color: Colors.blue),
               ],

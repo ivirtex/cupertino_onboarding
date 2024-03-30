@@ -41,6 +41,7 @@ class CupertinoOnboarding extends StatefulWidget {
   ///
   /// It is possible to restyle this widget to match older iOS versions.
   CupertinoOnboarding({
+    required this.controller,
     required this.pages,
     this.backgroundColor,
     this.bottomButtonChild = const Text('Continue'),
@@ -58,6 +59,10 @@ class CupertinoOnboarding extends StatefulWidget {
           pages.isNotEmpty,
           'Number of pages must be greater than 0',
         );
+
+  /// An object that can be used to control the position to which this page
+  /// view is scrolled.
+  final PageController controller;
 
   /// List of Widgets that will be displayed as pages.
   ///
@@ -132,21 +137,9 @@ class CupertinoOnboarding extends StatefulWidget {
 }
 
 class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
-  final PageController _pageController = PageController();
 
   int _currentPage = 0;
-  double _currentPageAsDouble = 0;
 
-  @override
-  void initState() {
-    super.initState();
-
-    _pageController.addListener(() {
-      setState(() {
-        _currentPageAsDouble = _pageController.page!;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +151,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
             Expanded(
               child: PageView(
                 physics: widget.scrollPhysics,
-                controller: _pageController,
+                controller: widget.controller,
                 children: widget.pages,
                 onPageChanged: (page) {
                   setState(() {
@@ -170,7 +163,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
             if (widget.pages.length > 1)
               DotsIndicator(
                 dotsCount: widget.pages.length,
-                position: _currentPageAsDouble,
+                position: _currentPage,
                 decorator: DotsDecorator(
                   activeColor: _kActiveDotColor.resolveFrom(context),
                   color: _kInactiveDotColor.resolveFrom(context),
@@ -221,7 +214,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
   }
 
   Future<void> _animateToNextPage() async {
-    await _pageController.nextPage(
+    await widget.controller.nextPage(
       duration: widget.pageTransitionAnimationDuration,
       curve: widget.pageTransitionAnimationCurve,
     );
