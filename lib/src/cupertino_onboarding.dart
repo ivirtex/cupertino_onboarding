@@ -54,6 +54,7 @@ class CupertinoOnboarding extends StatefulWidget {
     this.scrollPhysics = const BouncingScrollPhysics(),
     this.onPressed,
     this.onPressedOnLastPage,
+    this.onPageChanged,
     super.key,
   }) : assert(
           pages.isNotEmpty,
@@ -132,14 +133,39 @@ class CupertinoOnboarding extends StatefulWidget {
   /// widget and conditionally display other widget instead of the onboarding.
   final VoidCallback? onPressedOnLastPage;
 
+  /// Called whenever the page in the center of the viewport changes.
+  final ValueChanged<int>? onPageChanged;
+
   @override
   State<CupertinoOnboarding> createState() => _CupertinoOnboardingState();
 }
 
 class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
 
-  int _currentPage = 0;
+  double _currentPageAsDouble = 0;
 
+  bool isCeilOrFloor = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.controller.addListener(() {
+      setState(() {
+        if ((widget.controller.page ?? 0) > _currentPageAsDouble){
+          setState(() {
+            isCeilOrFloor = true;
+          });
+        } else{
+          setState(() {
+            isCeilOrFloor = false;
+          });
+        }
+        _currentPageAsDouble = widget.controller.page ?? 0;
+
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,20 +176,18 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
           children: [
             Expanded(
               child: PageView(
-                physics: widget.scrollPhysics,
-                controller: widget.controller,
-                children: widget.pages,
-                onPageChanged: (page) {
-                  setState(() {
-                    _currentPage = page;
-                  });
-                },
+                  physics: widget.scrollPhysics,
+                  controller: widget.controller,
+                  onPageChanged: widget.onPageChanged,
+                  children: widget.pages,
               ),
             ),
             if (widget.pages.length > 1)
               DotsIndicator(
                 dotsCount: widget.pages.length,
-                position: _currentPage,
+                position: isCeilOrFloor
+                    ? _currentPageAsDouble.ceil()
+                    : _currentPageAsDouble.floor(),
                 decorator: DotsDecorator(
                   activeColor: _kActiveDotColor.resolveFrom(context),
                   color: _kInactiveDotColor.resolveFrom(context),
@@ -186,7 +210,8 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                       color: widget.bottomButtonColor ??
                           CupertinoTheme.of(context).primaryColor,
                       padding: const EdgeInsets.all(16),
-                      onPressed: _currentPage == widget.pages.length - 1
+                      onPressed: _currentPageAsDouble.toInt() ==
+                              widget.pages.length - 1
                           ? widget.onPressedOnLastPage
                           : widget.onPressed ?? _animateToNextPage,
                       child: DefaultTextStyle(

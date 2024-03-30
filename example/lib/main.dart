@@ -85,6 +85,8 @@ class OnboardingOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
+
+      onPageChanged: (value) => print(value),
       controller: PageController(),
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
