@@ -38,7 +38,6 @@ Widget build(BuildContext context) {
     onPressedOnLastPage: () => Navigator.pop(context), 
     controller: PageController(), 
     onPageChanged:(value) {
-      
     },
     pages: [
       // To create What's New page like Calendar or Translator
