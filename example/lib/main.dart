@@ -85,9 +85,8 @@ class OnboardingOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
-
-      onPageChanged: (value) => print(value),
       controller: PageController(),
+      onPageChanged: (value) {},
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
         WhatsNewPage(
@@ -149,6 +148,7 @@ class TranslatorOnboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
       controller: PageController(),
+      onPageChanged: (value) {},
       onPressedOnLastPage: () => Navigator.pop(context),
       bottomButtonColor: CupertinoColors.systemTeal.resolveFrom(context),
       widgetAboveBottomButton: CupertinoButton(
@@ -222,6 +222,7 @@ class CalendarOnboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
       controller: PageController(),
+      onPageChanged: (value) {},
       bottomButtonColor: CupertinoColors.systemRed.resolveFrom(context),
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [

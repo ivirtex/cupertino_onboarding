@@ -35,7 +35,11 @@ Create `CupertinoOnboarding` widget and pass your pages as parameter:
 @override
 Widget build(BuildContext context) {
   return CupertinoOnboarding(
-    onPressedOnLastPage: () => Navigator.pop(context),
+    onPressedOnLastPage: () => Navigator.pop(context), 
+    controller: PageController(), 
+    onPageChanged:(value) {
+      
+    },
     pages: [
       // To create What's New page like Calendar or Translator
       // examples in the readme, use `WhatsNewPage` widget:
