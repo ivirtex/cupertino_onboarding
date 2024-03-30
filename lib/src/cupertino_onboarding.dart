@@ -141,7 +141,6 @@ class CupertinoOnboarding extends StatefulWidget {
 }
 
 class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
-
   double _currentPageAsDouble = 0;
 
   bool isCeilOrFloor = true;
@@ -152,17 +151,16 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
 
     widget.controller.addListener(() {
       setState(() {
-        if ((widget.controller.page ?? 0) > _currentPageAsDouble){
+        if ((widget.controller.page ?? 0) > _currentPageAsDouble) {
           setState(() {
             isCeilOrFloor = true;
           });
-        } else{
+        } else {
           setState(() {
             isCeilOrFloor = false;
           });
         }
         _currentPageAsDouble = widget.controller.page ?? 0;
-
       });
     });
   }
@@ -176,10 +174,10 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
           children: [
             Expanded(
               child: PageView(
-                  physics: widget.scrollPhysics,
-                  controller: widget.controller,
-                  onPageChanged: widget.onPageChanged,
-                  children: widget.pages,
+                physics: widget.scrollPhysics,
+                controller: widget.controller,
+                onPageChanged: widget.onPageChanged,
+                children: widget.pages,
               ),
             ),
             if (widget.pages.length > 1)
