@@ -160,7 +160,9 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
             isCeilOrFloor = false;
           });
         }
-        _currentPageAsDouble = widget.controller.page ?? 0;
+        setState(() {
+          _currentPageAsDouble = widget.controller.page ?? 0;
+        });
       });
     });
   }
