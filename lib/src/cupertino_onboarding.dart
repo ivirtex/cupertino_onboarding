@@ -150,12 +150,12 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
     super.initState();
 
     widget.controller.addListener(() {
-      setState(() {
         if ((widget.controller.page ?? 0) > _currentPageAsDouble) {
           setState(() {
             isCeilOrFloor = true;
           });
-        } else {
+        }
+        else {
           setState(() {
             isCeilOrFloor = false;
           });
@@ -163,7 +163,6 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
         setState(() {
           _currentPageAsDouble = widget.controller.page ?? 0;
         });
-      });
     });
   }
 
