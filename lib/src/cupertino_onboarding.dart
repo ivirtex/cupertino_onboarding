@@ -141,52 +141,37 @@ class CupertinoOnboarding extends StatefulWidget {
 }
 
 class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
-  double _currentPageAsDouble = 0;
-
-  bool isCeilOrFloor = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    widget.controller.addListener(() {
-        if ((widget.controller.page ?? 0) > _currentPageAsDouble) {
-          setState(() {
-            isCeilOrFloor = true;
-          });
-        }
-        else {
-          setState(() {
-            isCeilOrFloor = false;
-          });
-        }
-        setState(() {
-          _currentPageAsDouble = widget.controller.page ?? 0;
-        });
-    });
-  }
+  int _currentPageAsDouble = 0;
 
   @override
   Widget build(BuildContext context) {
+
+    widget.controller.addListener(() {
+      setState(() {
+        _currentPageAsDouble = widget.controller.page?.round() ?? 0;
+      });
+    });
+
     return ColoredBox(
       color: widget.backgroundColor ?? _kBackgroundColor.resolveFrom(context),
       child: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: PageView(
-                physics: widget.scrollPhysics,
-                controller: widget.controller,
-                onPageChanged: widget.onPageChanged,
-                children: widget.pages,
+              child: GestureDetector(
+
+                child: PageView(
+                  physics: widget.scrollPhysics,
+                  controller: widget.controller,
+                  onPageChanged: widget.onPageChanged,
+                  children: widget.pages,
+                ),
               ),
             ),
             if (widget.pages.length > 1)
               DotsIndicator(
                 dotsCount: widget.pages.length,
-                position: isCeilOrFloor
-                    ? _currentPageAsDouble.ceil()
-                    : _currentPageAsDouble.floor(),
+                position: _currentPageAsDouble.round(),
                 decorator: DotsDecorator(
                   activeColor: _kActiveDotColor.resolveFrom(context),
                   color: _kInactiveDotColor.resolveFrom(context),
@@ -209,7 +194,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                       color: widget.bottomButtonColor ??
                           CupertinoTheme.of(context).primaryColor,
                       padding: const EdgeInsets.all(16),
-                      onPressed: _currentPageAsDouble.toInt() ==
+                      onPressed: _currentPageAsDouble.round() ==
                               widget.pages.length - 1
                           ? widget.onPressedOnLastPage
                           : widget.onPressed ?? _animateToNextPage,
@@ -235,6 +220,12 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
   }
 
   Future<void> _animateToNextPage() async {
