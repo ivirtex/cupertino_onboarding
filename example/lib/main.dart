@@ -332,7 +332,9 @@ class _SampleOnboardingState extends State<SampleOnboarding> {
     return CupertinoOnboarding(
       controller: PageController(),
       onPageChanged: (value) {
-        setState(() => _currentPage = value,);
+        setState(
+          () => _currentPage = value,
+        );
       },
       onPressedOnLastPage: () => Navigator.pop(context),
       bottomButtonChild: _currentPage != 1
@@ -380,7 +382,8 @@ class _SampleOnboardingState extends State<SampleOnboarding> {
           body: Column(
             children: [
               CupertinoTextField(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 decoration: _kDefaultRoundedBorderDecoration,
                 prefix: const Text("     Username"),
                 style: const TextStyle(
