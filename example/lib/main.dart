@@ -118,7 +118,7 @@ class OnboardingOverview extends StatelessWidget {
               icon: Icon(CupertinoIcons.paintbrush),
             ),
             WhatsNewFeature(
-              title: Text('Style Flexiblity'),
+              title: Text('Style Flexibility'),
               description: Text(
                   "What's New Template can be styled to match new and old iOS versions of onboarding or your own preferences."),
               icon: Icon(CupertinoIcons.gear),
@@ -356,7 +356,7 @@ class _SampleOnboardingState extends State<SampleOnboarding> {
               ],
             ),
           ),
-          body: Text(
+          body: const Text(
             "LeetMaster, an unofficial API, offers a robust toolkit for coding enthusiasts, providing valuable resources to sharpen skills and conquer challenges with ease",
             textAlign: TextAlign.center,
           ),
