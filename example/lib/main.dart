@@ -70,6 +70,18 @@ class AppHome extends StatelessWidget {
                 builder: (_) => const OnboardingOverview(),
               ),
             ),
+            CupertinoButton(
+              child: Text(
+                'Sample Onboarding',
+                style: TextStyle(
+                  color: CupertinoColors.systemTeal.resolveFrom(context),
+                ),
+              ),
+              onPressed: () => CupertinoScaffold.showCupertinoModalBottomSheet(
+                context: context,
+                builder: (_) => const SampleOnboarding(),
+              ),
+            ),
           ],
         ),
       ),
@@ -85,6 +97,8 @@ class OnboardingOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
+      controller: PageController(),
+      onPageChanged: (value) {},
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
         WhatsNewPage(
@@ -104,7 +118,7 @@ class OnboardingOverview extends StatelessWidget {
               icon: Icon(CupertinoIcons.paintbrush),
             ),
             WhatsNewFeature(
-              title: Text('Style Flexiblity'),
+              title: Text('Style Flexibility'),
               description: Text(
                   "What's New Template can be styled to match new and old iOS versions of onboarding or your own preferences."),
               icon: Icon(CupertinoIcons.gear),
@@ -145,6 +159,8 @@ class TranslatorOnboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
+      controller: PageController(),
+      onPageChanged: (value) {},
       onPressedOnLastPage: () => Navigator.pop(context),
       bottomButtonColor: CupertinoColors.systemTeal.resolveFrom(context),
       widgetAboveBottomButton: CupertinoButton(
@@ -217,6 +233,8 @@ class CalendarOnboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoOnboarding(
+      controller: PageController(),
+      onPageChanged: (value) {},
       bottomButtonColor: CupertinoColors.systemRed.resolveFrom(context),
       onPressedOnLastPage: () => Navigator.pop(context),
       pages: [
@@ -254,6 +272,129 @@ class CalendarOnboarding extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class SampleOnboarding extends StatefulWidget {
+  const SampleOnboarding({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<SampleOnboarding> createState() => _SampleOnboardingState();
+}
+
+class _SampleOnboardingState extends State<SampleOnboarding> {
+  final BoxDecoration _kDefaultRoundedBorderDecoration = const BoxDecoration(
+    color: CupertinoDynamicColor.withBrightness(
+      color: CupertinoColors.white,
+      darkColor: CupertinoColors.black,
+    ),
+    border: Border(
+      top: BorderSide(
+        color: CupertinoDynamicColor.withBrightness(
+          color: Color(0x33000000),
+          darkColor: Color(0x33FFFFFF),
+        ),
+        width: 0.0,
+      ),
+      bottom: BorderSide(
+        color: CupertinoDynamicColor.withBrightness(
+          color: Color(0x33000000),
+          darkColor: Color(0x33FFFFFF),
+        ),
+        width: 0.0,
+      ),
+      left: BorderSide(
+        color: CupertinoDynamicColor.withBrightness(
+          color: Color(0x33000000),
+          darkColor: Color(0x33FFFFFF),
+        ),
+        width: 0.0,
+      ),
+      right: BorderSide(
+        color: CupertinoDynamicColor.withBrightness(
+          color: Color(0x33000000),
+          darkColor: Color(0x33FFFFFF),
+        ),
+        width: 0.0,
+      ),
+    ),
+    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+  );
+  int _currentPage = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoOnboarding(
+      controller: PageController(),
+      onPageChanged: (value) {
+        setState(
+          () => _currentPage = value,
+        );
+      },
+      onPressedOnLastPage: () => Navigator.pop(context),
+      bottomButtonChild: _currentPage != 1
+          ? const Text("Continue")
+          : const Text("Get Started"),
+      pages: <CupertinoOnboardingPage>[
+        CupertinoOnboardingPage(
+          bodyPadding: const EdgeInsets.symmetric(horizontal: 30),
+          title: Text.rich(
+            TextSpan(
+              text: "Welcome to ",
+              children: [
+                TextSpan(
+                  text: 'LeetMaster',
+                  style: TextStyle(
+                    color: CupertinoColors.systemTeal.resolveFrom(context),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: const Text(
+            "LeetMaster, an unofficial API, offers a robust toolkit for coding enthusiasts, providing valuable resources to sharpen skills and conquer challenges with ease",
+            textAlign: TextAlign.center,
+          ),
+        ),
+        CupertinoOnboardingPage(
+          bodyPadding: const EdgeInsets.symmetric(horizontal: 30),
+          title: Text.rich(
+            TextSpan(
+              text: "Enter ",
+              children: [
+                TextSpan(
+                  text: 'Leetcode ',
+                  style: TextStyle(
+                    color: CupertinoColors.systemTeal.resolveFrom(context),
+                  ),
+                ),
+                const TextSpan(
+                  text: 'Username ',
+                ),
+              ],
+            ),
+          ),
+          body: Column(
+            children: [
+              CupertinoTextField(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                decoration: _kDefaultRoundedBorderDecoration,
+                prefix: const Text("     Username"),
+                style: const TextStyle(
+                  color: CupertinoDynamicColor.withBrightness(
+                    color: CupertinoColors.black,
+                    darkColor: CupertinoColors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

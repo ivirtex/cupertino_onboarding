@@ -41,6 +41,7 @@ class CupertinoOnboarding extends StatefulWidget {
   ///
   /// It is possible to restyle this widget to match older iOS versions.
   CupertinoOnboarding({
+    required this.controller,
     required this.pages,
     this.backgroundColor,
     this.bottomButtonChild = const Text('Continue'),
@@ -53,11 +54,16 @@ class CupertinoOnboarding extends StatefulWidget {
     this.scrollPhysics = const BouncingScrollPhysics(),
     this.onPressed,
     this.onPressedOnLastPage,
+    this.onPageChanged,
     super.key,
   }) : assert(
           pages.isNotEmpty,
           'Number of pages must be greater than 0',
         );
+
+  /// An object that can be used to control the position to which this page
+  /// view is scrolled.
+  final PageController controller;
 
   /// List of Widgets that will be displayed as pages.
   ///
@@ -127,50 +133,45 @@ class CupertinoOnboarding extends StatefulWidget {
   /// widget and conditionally display other widget instead of the onboarding.
   final VoidCallback? onPressedOnLastPage;
 
+  /// Called whenever the page in the center of the viewport changes.
+  final ValueChanged<int>? onPageChanged;
+
   @override
   State<CupertinoOnboarding> createState() => _CupertinoOnboardingState();
 }
 
 class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
-  final PageController _pageController = PageController();
-
-  int _currentPage = 0;
-  double _currentPageAsDouble = 0;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _pageController.addListener(() {
-      setState(() {
-        _currentPageAsDouble = _pageController.page!;
-      });
-    });
-  }
+  int _currentPageAsDouble = 0;
 
   @override
   Widget build(BuildContext context) {
+
+    widget.controller.addListener(() {
+      setState(() {
+        _currentPageAsDouble = widget.controller.page?.round() ?? 0;
+      });
+    });
+
     return ColoredBox(
       color: widget.backgroundColor ?? _kBackgroundColor.resolveFrom(context),
       child: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: PageView(
-                physics: widget.scrollPhysics,
-                controller: _pageController,
-                children: widget.pages,
-                onPageChanged: (page) {
-                  setState(() {
-                    _currentPage = page;
-                  });
-                },
+              child: GestureDetector(
+
+                child: PageView(
+                  physics: widget.scrollPhysics,
+                  controller: widget.controller,
+                  onPageChanged: widget.onPageChanged,
+                  children: widget.pages,
+                ),
               ),
             ),
             if (widget.pages.length > 1)
               DotsIndicator(
                 dotsCount: widget.pages.length,
-                position: _currentPageAsDouble,
+                position: _currentPageAsDouble.round(),
                 decorator: DotsDecorator(
                   activeColor: _kActiveDotColor.resolveFrom(context),
                   color: _kInactiveDotColor.resolveFrom(context),
@@ -193,7 +194,8 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
                       color: widget.bottomButtonColor ??
                           CupertinoTheme.of(context).primaryColor,
                       padding: const EdgeInsets.all(16),
-                      onPressed: _currentPage == widget.pages.length - 1
+                      onPressed: _currentPageAsDouble.round() ==
+                              widget.pages.length - 1
                           ? widget.onPressedOnLastPage
                           : widget.onPressed ?? _animateToNextPage,
                       child: DefaultTextStyle(
@@ -220,8 +222,14 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
     );
   }
 
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+
   Future<void> _animateToNextPage() async {
-    await _pageController.nextPage(
+    await widget.controller.nextPage(
       duration: widget.pageTransitionAnimationDuration,
       curve: widget.pageTransitionAnimationCurve,
     );
