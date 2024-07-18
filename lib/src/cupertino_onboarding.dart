@@ -31,17 +31,12 @@ const EdgeInsets _kBottomButtonPadding = EdgeInsets.only(
   bottom: 60,
 );
 
-/// Represents an onboarding screen in iOS 15 style.
-/// Works great with `modal_bottom_sheet` package.
-///
-/// It is possible to restyle this widget to match older iOS versions.
+/// Represents an onboarding screen in iOS style.
 class CupertinoOnboarding extends StatefulWidget {
   /// Default constructor of the [CupertinoOnboarding] widget.
-  /// Works great with `modal_bottom_sheet` package.
-  ///
-  /// It is possible to restyle this widget to match older iOS versions.
   CupertinoOnboarding({
     required this.pages,
+    this.controller,
     this.backgroundColor,
     this.bottomButtonChild = const Text('Continue'),
     this.bottomButtonColor,
@@ -65,6 +60,9 @@ class CupertinoOnboarding extends StatefulWidget {
   /// or `WhatsNewPage` widgets.
   final List<Widget> pages;
 
+  /// Controller that can be used to navigate between pages.
+  final PageController? controller;
+
   /// Background color of the onboarding screen.
   ///
   /// Defaults to the iOS style.
@@ -72,7 +70,7 @@ class CupertinoOnboarding extends StatefulWidget {
 
   /// Child used in the bottom button.
   ///
-  /// Default to the Text('Continue') widget.
+  /// Default to the `Text('Continue')` widget.
   final Widget bottomButtonChild;
 
   /// Background color of the bottom button.
@@ -83,7 +81,7 @@ class CupertinoOnboarding extends StatefulWidget {
 
   /// Border radius of the next button.
   ///
-  /// Can't match native iOS look, because as of 3.0.3 Flutter
+  /// Can't match native iOS look, because Flutter
   /// still uses rounded rectangle shape for [CupertinoButton]
   /// instead of squircle paths.
   /// https://github.com/flutter/flutter/issues/13914
@@ -132,7 +130,7 @@ class CupertinoOnboarding extends StatefulWidget {
 }
 
 class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
-  final PageController _pageController = PageController();
+  late PageController _pageController;
 
   int _currentPage = 0;
   double _currentPageAsDouble = 0;
@@ -141,6 +139,7 @@ class _CupertinoOnboardingState extends State<CupertinoOnboarding> {
   void initState() {
     super.initState();
 
+    _pageController = widget.controller ?? PageController();
     _pageController.addListener(() {
       setState(() {
         _currentPageAsDouble = _pageController.page!;

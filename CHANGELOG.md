@@ -1,3 +1,8 @@
+## 1.3.0
+
+- Added `pageController` parameter to `CupertinoOnboarding`,
+- Fixed `titleFlex` parameter not being applied.
+
 ## 1.2.0
 
 - Added `scrollPhysics` parameters to `CupertinoOnboarding` and `WhatsNewPage`,
