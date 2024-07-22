@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 // Project imports:
 import 'package:cupertino_onboarding/src/constants.dart';
 
-const EdgeInsets _kOnboardingPagePadding = EdgeInsets.only(left: 35, right: 15);
+const EdgeInsets _kOnboardingPagePadding = EdgeInsets.only(left: 35, right: 35);
 
 const double _kTitleTopIndent = 80;
 
